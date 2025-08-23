@@ -1,5 +1,12 @@
-import { createContext } from "react";
-import type { IMessageContextType } from "./types";
-export const MessageContext = createContext<IMessageContextType | null>(null);
+import { useState } from "react";
+import type { MessageProviderProps, MessageType } from "./types";
+import { MessageContext } from "./messageContext";
 
-export const MessageProvider = ({ children }: MessageProviderProps) => {};
+export const MessageProvider = ({ children }: MessageProviderProps) => {
+  const [message, setMessage] = useState<MessageType | null>(null);
+  return (
+    <MessageContext.Provider value={{ message, setMessage }}>
+      {children}
+    </MessageContext.Provider>
+  );
+};
