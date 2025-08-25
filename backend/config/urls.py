@@ -16,12 +16,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework import routers
 from django.http import HttpResponse
+from users.views import UserViewSet
 
+router = routers.DefaultRouter()
 def health(_): return HttpResponse("Api online")
+
+router.register(r"users", UserViewSet)
 
 urlpatterns = [
     path("", health),
     path('admin/', admin.site.urls),
+    path('api/', include(router.urls)),
     path('api/users/', include("users.urls")),
 ]
