@@ -18,15 +18,10 @@ from django.contrib import admin
 from django.urls import path, include
 from django.http import HttpResponse
 
-def health(_): return HttpResponse("API online")
+def health(_): return HttpResponse("Api online")
 
 urlpatterns = [
     path("", health),
     path('admin/', admin.site.urls),
-
-
-    path('api/users/', include('users.urls')),
-    # path('api/subjects/', include('subjects.urls')),
-    # path('api/tutoring/', include('tutoring.urls')),
-    # path('api/reviews/', include('reviews.urls')),
+    path('api/users/', include("users.urls")),
 ]
