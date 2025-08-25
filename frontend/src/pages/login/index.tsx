@@ -2,12 +2,12 @@ import { useState } from "react";
 import { service } from "../../api/service";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
+  const [user, setUser] = useState("");
   const [senha, setSenha] = useState("");
   async function handleLogin(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     try {
-      const res = await service.loginUser(email, senha);
+      const res = await service.loginUser(user, senha);
       console.log(res, "res login");
     } catch (error) {
       console.error(error);
@@ -15,13 +15,16 @@ export default function LoginPage() {
   }
   return (
     <div>
-      Login
+      <div>
+        <h1> Login</h1>
+      </div>
+
       <form onSubmit={(e) => handleLogin(e)} action="" method="post">
-        <label htmlFor="email">Email</label>
+        <label htmlFor="text">User</label>
         <input
-          onChange={(e) => setEmail(e.target.value)}
-          id="email"
-          type="email"
+          onChange={(e) => setUser(e.target.value)}
+          id="text"
+          type="text"
         />
         <label htmlFor="senha">Senha</label>
         <input

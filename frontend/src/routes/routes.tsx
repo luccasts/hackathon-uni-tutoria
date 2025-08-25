@@ -1,9 +1,9 @@
-import Layout from "../components/layout";
+import Layout from "../components/layout/Layout";
 import { AuthProvider } from "../context/auth";
 import { MessageProvider } from "../context/message";
-import Home from "../pages/home";
-import LoginPage from "../pages/login";
-import RegisterPage from "../pages/cadastrar";
+import Home from "../pages/Home";
+import LoginPage from "../pages/Login";
+import RegisterPage from "../pages/Cadastrar";
 
 export const routes = [
   {

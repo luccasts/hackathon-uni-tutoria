@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 import { axiosInstance } from "./instance";
 
 export const service = {
@@ -8,33 +9,42 @@ export const service = {
     senha: string,
   ) => {
     try {
-      const res = await axiosInstance.post("/api/", {
+      const res = await axiosInstance.post("/api/users/register/", {
         username: nome,
         password: senha,
         course: course,
         email: email,
       });
+
       return res;
     } catch (error) {
-      console.error(error);
+      if (error instanceof AxiosError) {
+        console.log(error.response?.data);
+      } else {
+        console.error("Erro desconhecido: ", error);
+      }
     }
   },
 
-  loginUser: async (email: string, senha: string) => {
+  loginUser: async (user: string, senha: string) => {
     try {
-      const res = await axiosInstance.post("/api/login/", {
-        email: email,
+      const res = await axiosInstance.post("/api/users/login/", {
+        username: user,
         password: senha,
       });
       return res;
     } catch (error) {
-      console.error(error);
+      if (error instanceof AxiosError) {
+        console.log(error.response?.data);
+      } else {
+        console.error("Erro desconhecido:", error);
+      }
     }
   },
 
   getUserData: async (acesso: string) => {
     try {
-      const res = await axiosInstance.get("/api/refresh", {
+      const res = await axiosInstance.get("/api/users/refresh", {
         headers: {
           Authorization: `Bearer ${acesso}`,
         },
@@ -47,7 +57,7 @@ export const service = {
 
   getToken: async (nome: string, senha: string) => {
     try {
-      const res = await axiosInstance.post("api/auth/login/", {
+      const res = await axiosInstance.post("/api/users/refresh/", {
         nome,
         senha,
       });
